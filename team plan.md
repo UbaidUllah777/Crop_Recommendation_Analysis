@@ -4,9 +4,9 @@
 
 | Member | Name | Student ID |
 |---|---|---|
-| Member 1 | Kaushik | |
+| Member 1 | Koushik | | 9087547
 | Member 2 | Rangeetha | 9081357 |
-| Member 3 | Ubaid |  |
+| Member 3 | Ubaid |  | 9110715
 
 
 
