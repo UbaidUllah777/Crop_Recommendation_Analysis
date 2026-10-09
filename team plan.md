@@ -42,7 +42,7 @@ Use all analysis sections from `assignment 1.ipynb` as the foundation for the ne
 |---|---|---|---|
 | 1 | Sections 1–7 | Finalize framing; verify source and setup; inspect cleansing; explain descriptive renaming and full precision; review CropAnalyzer and all descriptive measures | Member 2 |
 | 2 | Sections 8–11 | Review all four inherited visualizations and their discussion; check Venn set logic; explain seven-variable histograms and rice/maize plots; interpret QQ plots and Shapiro–Wilk | Member 3 |
-| 3 | Sections 12–18 | Review F and Levene assumptions; verify Welch calculations and confidence interval; explain p-values and normalization; align conclusions, Whiteboard and presentation | Member 1 |
+| 3 | Sections 12–18 | Review F and Levene assumptions; verify Welch calculations and confidence interval; explain p-values and normalization; align conclusions, Summary Report| Member 1 |
 
 Member 1 leads reproducibility checks, Member 2 checks figure readability, and Member 3 combines the final notebook. Everyone reviews the complete work and can present any section. Ownership is not an exemption from understanding another member's code.
 
