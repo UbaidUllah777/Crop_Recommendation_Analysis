@@ -34,15 +34,15 @@ Use all analysis sections from `assignment 1.ipynb` as the foundation for the ne
 | Statistical Profiling & Object-Oriented Analysis | 7 | CropAnalyzer, mean, median, mode, sample variance/SD, quartiles, summary table |
 | Visual Analytics & Graphical Presentations | 8 | All four original visual types and the same six selected crops |
 | Key Analytical Insights & Discussion | 9 | Four original discussion topics, with corrected and recomputed statements |
-| New lab requirements | 10–18 | Expanded histograms, QQ/Shapiro, F/Levene, Welch t, interpretations, normalization discussion, Whiteboard, presentation, references |
+| New lab requirements | 10–15 | Expanded histograms, QQ/Shapiro, F, Welch t, interpretations, normalization discussion,Summary|
 
 ## Three-member work allocation
 
 | Member | Ownership | Concrete responsibilities | Peer reviewer |
 |---|---|---|---|
-| 1 | Sections 1–7 | Finalize framing; verify source and setup; inspect cleansing; explain descriptive renaming and full precision; review CropAnalyzer and all descriptive measures | Member 2 |
-| 2 | Sections 8–11 | Review all four inherited visualizations and their discussion; check Venn set logic; explain seven-variable histograms and rice/maize plots; interpret QQ plots and Shapiro–Wilk | Member 3 |
-| 3 | Sections 12–18 | Review F and Levene assumptions; verify Welch calculations and confidence interval; explain p-values and normalization; align conclusions, Summary Report| Member 1 |
+| Koushik | Sections 1–7 | Finalize framing; verify source and setup; inspect cleansing; explain descriptive renaming and full precision; review CropAnalyzer and all descriptive measures | Rangeetha|
+| Rangeetha | Sections 8–11 | Review all four inherited visualizations and their discussion; check Venn set logic; explain seven-variable histograms and rice/maize plots; interpret QQ plots and Shapiro–Wilk | Ubaid|
+| Ubaid | Sections 12–15 | Review F assumptions; verify Welch calculations and confidence interval; explain p-values and normalization; align conclusions, Summary Report| Koushik & Rangeetha|
 
 Member 1 leads reproducibility checks, Member 2 checks figure readability, and Member 3 combines the final notebook. Everyone reviews the complete work and can present any section. Ownership is not an exemption from understanding another member's code.
 
@@ -82,11 +82,11 @@ All word counts exclude headings and use whitespace-separated words. If text is 
 ## Shared statistical decisions
 
 - Alpha = 0.05; use two-sided mean and variance alternatives.
-- Fix rice and maize as the teaching comparison; do not search across crop pairs for the smallest p-value.
+- Fix rice and maize as the learning comparison; do not search across crop pairs for the smallest p-value.
 - Keep full precision and original observations. Do not delete observations to improve normality.
 - Use rainfall in mm, with accumulation period explicitly unspecified.
 - Test within-group normality; pooled normality is descriptive context.
-- Keep the classical F-test for the lab, qualify its failed normality assumption, and report Levene separately.
+- Keep the classical F-test for the lab, qualify its failed normality assumption.
 - Use Welch's mean comparison rather than assuming equal variances. A t-statistic measures a mean difference in standard-error units.
 - Interpret inferential results conditionally: independence and representative field sampling are unverified.
 - Discuss differences and confidence intervals, not only p-values. The data show associations, not causal effects or crop requirements.
@@ -100,15 +100,6 @@ All word counts exclude headings and use whitespace-separated words. If text is 
 5. Above-median thresholds are relative to this dataset, not agricultural high/low standards.
 6. Visual group differences do not establish optimized fertilizer, maximum yields, strict humidity requirements, or validated crop recommendations.
 
-## Integration and review sequence
-
-1. All three members read the notebook and agree on the scope and crop comparison.
-2. Member 1 checks Sections 1–7 and hands the validated tables and class explanation to Member 2.
-3. Member 2 checks visual interpretations and normality, then hands the assumption assessment to Member 3.
-4. Member 3 checks comparisons and communication, then combines proposed edits.
-5. Review in a cycle: Member 2 reviews Member 1, Member 3 reviews Member 2, and Member 1 reviews Member 3.
-6. Run from a clean kernel on each laptop. If the dataset or group selection changes, revise the static Markdown summaries and Whiteboard after rerunning.
-7. Each member explains one section they did not author and practices a small code change. Rehearse the complete presentation together.
 
 ## Five-minute presentation using the notebook
 
@@ -116,34 +107,21 @@ All word counts exclude headings and use whitespace-separated words. If text is 
 |---|---|---|---|
 | 0:00–1:30 | Member 1 | Overview, quality assessment, CropAnalyzer summary | Dataset and audience; what the measurements can and cannot support |
 | 1:30–3:00 | Member 2 | Four-view visual dashboard, then group QQ plots | Inherited analysis patterns; 255-record overlap; both rainfall groups reject normality |
-| 3:00–4:30 | Member 3 | F/Levene table, Welch difference plot, assessment | Variability and mean differences; limitations of inference |
-| 4:30–5:00 | Any member | Whiteboard and next step | Obtain local, dated field data before policy action |
+| 3:00–4:30 | Member 3 | F Test, Welch difference plot, assessment | Variability and mean differences; limitations of inference |
+| 4:30–5:00 | Any member |  Conclusion & Summary |
 
-Do not narrate every code line. Keep all sections available for questions. Everyone must be ready to present the entire notebook and explain changes. Test the projector connection, required adapters, display scaling, and chart readability on all three laptops.
 
-## Whiteboard and files
+## Summary and files
 
-The Whiteboard draft is a local PNG ready to import into the team's chosen Teams Whiteboard. It has not been posted. Its rainfall-focused story summarizes the new lab; the inherited four-view dashboard is also available in `figures/06_reference_visual_analytics.png` for insertion or discussion.
+The Summary is a local PNG . Its rainfall-focused story summarizes the new lab; the inherited four-view dashboard is also available in `figures/06_reference_visual_analytics.png` for insertion or discussion.
 
-- `Crop_Recommendation_New_Lab.ipynb`: new executed notebook, including every inherited analysis section.
+- `Crop_Recommendation_Worskhop_A.ipynb`: new executed notebook, including every inherited analysis section.
 - `team plan.md`: this shareable plan.
-- `Teams_whiteboard_draft.png`: first report draft for Teams.
-- `data/Crop_recommendation.csv`: unchanged supplied data.
+- `Summary.png`: Summary of he findings.
+- `data/Crop_recommendation.csv`: unchanged dataset.
 - `figures/`: individual charts and the inherited-analysis dashboard.
 - `requirements.txt`: tested package versions, including matplotlib-venn.
 
-Extract the ZIP before opening the notebook. Keep its folders together. Use Python 3.12 and install `requirements.txt` into the active Jupyter environment. Restart Kernel and Run All. The source download check is optional for offline reruns and is enabled by setting `VERIFY_SOURCE_ONLINE = True`.
 
-## Final checklist
 
-- [ ] Team names and IDs entered in both files.
-- [ ] Every inherited analysis section reviewed and understood.
-- [ ] All cells execute in order on each laptop.
-- [ ] Required 100-word and 50-word summaries checked after edits.
-- [ ] F-test limitation, robust check, and Welch interpretation understood.
-- [ ] Z-score work remains excluded.
-- [ ] Notebook, Whiteboard, and oral findings agree.
-- [ ] Everyone can modify the code and present any section.
-- [ ] Projector connections and five-minute timing tested.
-
-Statistical and dataset references appear in Section 18 of the notebook. The original notebook is used as analysis material; the latest lab instructions govern the deliverables.
+Statistical and dataset references appear in the last section of the notebook. The original notebook is used as analysis material; the latest lab instructions govern the deliverables.
