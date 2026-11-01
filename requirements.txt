@@ -1,0 +1,10 @@
+# Dependencies used by Assignment 1, Workshop A, and expected for Workshop B
+numpy
+pandas
+matplotlib
+seaborn
+scipy
+matplotlib-venn
+scikit-learn
+ipython
+jupyterlab
