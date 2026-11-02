@@ -6,9 +6,9 @@ Team project for **PROG8431 — Data Analysis, Mathematics, Modeling and Algorit
 
 | Team member | Student ID | GitHub | Workshop A responsibility | Workshop B proposed responsibility |
 |---|---|---|---|---|
-| Ubaid Ullah | 9110715 | [UbaidUllah777](https://github.com/UbaidUllah777) | Sections 12–15: statistical comparisons and communication | Introduction, two-variable choice, scaling, integration |
-| Rangeetha | 9081357 | [rangeethasajeer-debug](https://github.com/rangeethasajeer-debug) | Sections 8–11: visuals and normality | K-Means, elbow/validation, scatter plots |
-| Koushik Balne | 9087547 | [koushikbalne97](https://github.com/koushikbalne97) | Sections 1–7: setup, data and statistical profile | Cluster profile across all features, review and conclusion |
+| Ubaid Ullah | 9110715 | [UbaidUllah777](https://github.com/UbaidUllah777) | Sections 12–15: statistical comparisons and communication | Data quality, EDA, variable selection, scaling, elbow analysis, silhouette evaluation.|
+| Rangeetha | 9081357 | [rangeethasajeer-debug](https://github.com/rangeethasajeer-debug) | Sections 8–11: visuals and normality |Final clustering model, centroids, comprehensive cluster profiles, crop-label interpretation, visualizations. |
+| Koushik Balne | 9087547 | [koushikbalne97](https://github.com/koushikbalne97) | Sections 1–7: setup, data and statistical profile | Independent validation, conclusions, limitations, and final review. |
 
 Workshop B responsibilities are a **proposed division**, not an assertion that the work is already complete. Actual individual work and peer review should be traceable through issues, commits and PRs.
 
@@ -46,25 +46,67 @@ Extends exploratory analysis with:
 
 **Recorded finding:** rice-labelled observations have mean rainfall about **236.18 mm**, versus **84.77 mm** for maize, giving a mean difference of about **151.41 mm**. The groups reject normality at the 5% level; the F-test has a violated normality assumption and must be interpreted cautiously. These are not irrigation requirements.
 
+
 ## Assignment 3 — Problem Analysis Workshop B: K-Means Clustering
 
-**Status: planned / in development — do not mistake the plan for completed results.**
+**Notebook:** [`Crop_Recommendation_Workshop_B.ipynb`](Crop_Recommendation_Workshop_B.ipynb)
 
-**Planned notebook:** `Crop_Recommendation_Workshop_B.ipynb` (will be linked after it is added)
+**Project question:** Can K-Means clustering identify meaningful groups of growing conditions in the Crop Recommendation Dataset, and what do those groups reveal about crop labels?
 
-**Proposed question:** Can K-Means identify meaningful groups of growing conditions, and how do crop labels distribute across the groups?
+### Dataset and feature selection
 
-The assignment requires that we:
+The analysis uses the original Crop Recommendation Dataset, containing 2,200 observations, seven numerical variables, and 22 crop labels.
 
-1. Follow the Week 7 clustering demonstration and inspect/refine the existing dataset.
-2. Explain why clustering may deepen understanding of our project data.
-3. Choose and justify two variables used to define clusters.
-4. Examine and standardize using one of the methods shown in class; explain the choice.
-5. Run K-Means and use an elbow chart plus additional assessment to justify the final cluster count.
-6. Visualize clusters and profile them with **all relevant dataset variables**, assign descriptive names, and explain insights and limitations.
-7. Present the **same submitted notebook** in a seven-minute team presentation.
+Initial exploratory analysis examined rainfall, temperature, and humidity. The final two clustering variables are:
 
-**Important:** We have **not** chosen the final two variables, scaler, number of clusters, or findings yet. These should be evidence-based, using the course demonstration as the primary implementation reference.
+- **Rainfall:** A numerical measurement of recorded rainfall, expressed in millimetres.
+- **Humidity:** Relative humidity, expressed as a percentage.
+
+Rainfall and humidity were selected to investigate environmental moisture-related patterns. Crop labels are excluded from the K-Means model inputs and can be used afterwards to interpret the resulting clusters.
+
+### Standardization
+
+Both selected variables were standardized using the z-score method demonstrated in class. Standardization places rainfall and humidity on comparable scales before K-Means calculates Euclidean distances.
+
+The original data values remain available for interpretation.
+
+### Selecting the number of clusters
+
+K-Means models were evaluated for K = 1 through 10 using the elbow method. Additional evaluations included silhouette scores, cluster sizes, and visual comparisons of K = 3, 4, 5, and 6.
+
+The elbow curve suggested an early bend near K = 3. However, K = 6 achieved the highest full-dataset silhouette score among the shortlisted solutions.
+
+| K | Full-dataset silhouette score | Inertia |
+|---|---:|---:|
+| 3 | 0.485 | 1,413.29 |
+| 4 | 0.462 | 1,030.73 |
+| 5 | 0.478 | 757.56 |
+| 6 | 0.508 | 552.36 |
+
+**Current recommended model:** K = 6 using standardized rainfall and humidity.
+
+The smallest K = 6 cluster contained 190 observations and the largest contained 541. This recommendation is based on the evaluated models and will be considered alongside the final cluster profiles.
+
+### Current progress
+
+Completed analysis:
+- Dataset loading and data-quality assessment
+- Exploratory analysis and two-variable selection
+- Z-score standardization and before/after comparisons
+- Elbow analysis for K = 1–10
+- Sampled and full-dataset silhouette evaluation
+- Visual comparison of shortlisted cluster counts
+- Evidence-based recommendation of K = 6
+
+The remaining cluster profiling, crop-label interpretation, final findings, and team integration are not yet reported as completed.
+
+### Interpretation limits
+
+Clusters represent similarity in rainfall and humidity within this dataset. They are not validated farming zones, causal relationships, or independently verified crop recommendations.
+
+The dataset does not specify the rainfall measurement interval, location, sampling design, or farming season, so agricultural conclusions require caution.
+
+
 
 ## Repository organization
 
@@ -76,13 +118,13 @@ Existing committed material:
 - `figures/` — generated figures
 - `Teams_whiteboard_draft.png` — Workshop A summary figure
 - `team plan.md` — existing Workshop A plan (preserve for history)
+- `requirements.txt` — environment dependencies, if not already added
+- `Crop_Recommendation_Workshop_B.ipynb` — new notebook
+- `team plan - Workshop B.md` — project plan and task allocation
 
 Planned Workshop B additions:
 
-- `Crop_Recommendation_Workshop_B.ipynb` — new notebook
-- `team plan - Workshop B.md` — project plan and task allocation
 - `collaboration/Workshop_B_review_log.md` — genuine work and review records, if created
-- `requirements.txt` — environment dependencies, if not already added
 
 ## Run locally
 
