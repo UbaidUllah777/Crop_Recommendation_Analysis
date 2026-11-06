@@ -42,10 +42,13 @@ The PR history below is the primary evidence of contributions and formal reviews
 | 6: K selection | Inertia for K = 1–10, elbow plot, improvement per additional K, variation explained, scatter comparison of K = 3–6 and cluster-size checks | Final recommendation **K = 6** |
 | 7: Final grouping | Stored K = 6 model, original-unit centres, six named clusters, counts, means of **all seven** numeric variables, crop heatmap, additional profiles and interpretation | **All six clusters profiled**; figures and tables included |
 | 8: Recommendation | Model choice, methodological rationale and limitations | Rainfall + humidity; Z-score; K-Means with `random_state=42`, `n_init=10`; K = 6 |
+| 9: Conclusion | Concise answer to the original research question, rice–maize pattern, and limitations | The final integrated notebook includes Koushik's concluding Markdown section |
+
+**Source-version check:** The downloaded **Assignment 3 integration-branch notebook** has **38 cells**, with **19 executed code cells** and **Section 9: Final Conclusion**. The earlier copy without Section 9 is not the final version.
 
 **Important correction:** Older planning text and the original description of PR #3 mentioned **silhouette scores**. The **final uploaded notebook does not import or calculate a silhouette metric**. Its model selection is based on the elbow/inertia evidence, variation explained, sizes, scatter plots and descriptive utility. Do not report 0.508 or make a silhouette-based selection claim when presenting this final notebook.
 
-The uploaded notebook contains saved outputs for **19 code cells** with execution numbers 1–19 and no stored error outputs. That indicates a completed saved execution, **not** independently verified fresh-kernel reproducibility.
+The downloaded final integrated notebook contains saved outputs for **19 code cells** with execution numbers 1–19 and no stored error outputs. That indicates a completed saved execution, **not** independently verified fresh-kernel reproducibility.
 
 ## 4. How K = 6 was chosen
 
@@ -110,7 +113,7 @@ This table describes verified PR status and review events, not unrecorded meetin
 | **4:50–6:00** | Rangeetha | Seven-variable profiles, crop-label heatmap and key insights |
 | **6:00–7:00** | Koushik | Conclusions, limitations and what would require real farm data |
 
-The order is a **presentation plan**, not a claim a rehearsal happened. Demonstrate the **exact notebook submitted** and be ready to answer questions about the entire analysis.
+The order is a **presentation plan**, not a claim a rehearsal happened. Koushik's speaking portion should align with **Section 9**, rather than reading the detailed Section 8 recommendations again. Demonstrate the **exact notebook submitted** and be ready to answer questions about the entire analysis.
 
 ## 8. Limitations and responsible interpretation
 
@@ -126,7 +129,7 @@ The order is a **presentation plan**, not a claim a rehearsal happened. Demonstr
 - [x] Data checks, EDA, feature choice and scaling comparison are included.
 - [x] K = 1–10 elbow/inertia evaluation and K = 3–6 comparison are included.
 - [x] Final K = 6 model, centroids, named groups, seven-variable profiles and crop-label analysis are included.
-- [x] Conclusion, limitations, charts and summary tables are included.
+- [x] Section 9 final conclusion (Koushik), limitations, charts and summary tables are included.
 - [x] PRs #3, #4 and #5 are merged; formal approved reviews recorded for #4 and #5.
 - [ ] Independently perform **Restart Kernel → Run All** on the final uploaded notebook and confirm all outputs and paths.
 - [ ] Place the final `Crop_Recommendation_Workshop_B.ipynb`, `README.md` and both team plans on the branch being submitted; confirm branch visibility on GitHub.
@@ -134,4 +137,4 @@ The order is a **presentation plan**, not a claim a rehearsal happened. Demonstr
 - [ ] Confirm seven-minute rehearsal and readiness for professor questions (only if performed).
 - [ ] Submit the unzipped `.ipynb` and correct GitHub repository/branch URL before the instructor's deadline.
 
-**Updated:** November 5, 2026. This replaces the November 1 draft. Completed results and verified PR histories are reported; outstanding checks are not misrepresented as complete.
+**Updated for the final integrated notebook:** November 5, 2026. This replaces the November 1 draft. Completed results and verified PR histories are reported; outstanding checks are not misrepresented as complete.

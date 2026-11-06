@@ -62,9 +62,11 @@ Extended the exploratory work with distribution comparisons, Q–Q plots, Shapir
 
 ### Assignment 3 — Problem Analysis Workshop B: K-Means Clustering
 
-**Final notebook:** [`Crop_Recommendation_Workshop_B.ipynb`](Crop_Recommendation_Workshop_B.ipynb)
+**Final integrated notebook:** [`Crop_Recommendation_Workshop_B.ipynb`](Crop_Recommendation_Workshop_B.ipynb)
 
-The completed notebook contains the following stages:
+The final integrated notebook contains **38 cells (19 code and 19 Markdown)**, including the conclusion in **Section 9**. Its saved code outputs have execution counts 1–19 with no stored error output. This is evidence of a saved run, not an independent test on a fresh environment.
+
+The notebook contains these stages:
 
 1. **Load and assess the data:** Inspect shape, types, missing values, duplicates, crop balance, and numerical validity.
 2. **Perform EDA:** Examine distributions, descriptive statistics, box plots, and scatter plots for rainfall, humidity, and the alternative candidate temperature.
@@ -73,6 +75,7 @@ The completed notebook contains the following stages:
 5. **Evaluate cluster counts:** Fit K-Means for **K = 1 through 10**, generate the elbow curve, calculate the reduction in inertia and fraction of two-feature variation explained, examine cluster sizes, and visualize **K = 3, 4, 5, and 6**.
 6. **Select and describe the final model:** Choose **K = 6**, convert cluster centres back to original units, assign descriptive names, and summarize all seven numerical variables and crop-label distributions.
 7. **Interpret results and limitations:** Explain what the six groups show—and what they do not demonstrate about real agricultural suitability.
+8. **Conclude (Section 9):** Summarize the research question, the K = 6 outcome, the rice–maize contrast and the need for real-world validation.
 
 **K-Means settings:** `n_init=10`, `random_state=42`, with Euclidean-distance clustering on `rainfall_std` and `humidity_std`.
 
@@ -123,7 +126,7 @@ Cluster names are based on their centre **humidity** and **rainfall** values. Th
 
 ## Conclusions and limitations
 
-The final recommendation is **K-Means with K = 6**, trained on **Z-score-standardized rainfall and relative humidity**, with clusters interpreted using the original values and crop-label distributions. This scheme is useful for summarizing environmental patterns in the supplied dataset.
+The final recommendation is **K-Means with K = 6**, trained on **Z-score-standardized rainfall and relative humidity**, with clusters interpreted using original measurements and crop-label distributions. **Section 9** concludes that the six groups summarize recorded moisture conditions and place rice and most maize observations in different moisture groups. These are descriptive patterns in the supplied dataset, not validated crop recommendations.
 
 Its limitations are important:
 
@@ -143,11 +146,11 @@ Its limitations are important:
 | [`Crop_Recommendation_Workshop_B.ipynb`](Crop_Recommendation_Workshop_B.ipynb) | **Assignment 3: completed K-Means clustering analysis** |
 | [`Crop_recommendation.csv`](Crop_recommendation.csv) | Input dataset; keep at repository root |
 | `figures/` | Supporting figures from project work, where included |
-| `team plan.md` | Existing Workshop A planning notes |
-| `team plan - Workshop B.md` | Workshop B planning and task allocation, where included |
+| `team plan.md` | Workshop A final historical plan and handoff to Workshop B |
+| `team plan - Workshop B.md` | Completed Workshop B work, PR evidence, presentation plan and checks |
 | `README.md` | Project overview, methods, results, and reproduction instructions |
 
-The primary deliverables are the **notebooks**; plots, tables, model comparisons, and conclusions for Workshop B are included inside its `.ipynb` file.
+The core Workshop B deliverable is the **`.ipynb` notebook itself** (not a ZIP). Plots, tables, model comparisons, cluster interpretations, and the final conclusion are stored in the notebook.
 
 ## How to run
 
@@ -177,10 +180,18 @@ import pandas as pd
 df = pd.read_csv(Path("Crop_recommendation.csv"))
 ```
 
-The K-Means outputs are reproducible with the specified parameters and appropriate library versions. Saved notebook outputs document the reported results; running locally still requires the dataset and dependencies.
+The seed and `n_init` setting support repeatable K-Means results when using a compatible environment. The saved notebook outputs document the reported results; they do not by themselves verify a clean rerun on a different machine.
 
 ## Data attribution
 
 **Dataset:** Atharva Ingle, [Crop Recommendation Dataset on Kaggle](https://www.kaggle.com/datasets/atharvaingle/crop-recommendation-dataset).
 
 **Project:** Academic team analysis for PROG8431. Findings should be interpreted as exploratory observations from this dataset, not practical farming advice.
+
+## Collaboration record
+
+- [PR #3 — Ubaid: EDA, scaling and K evaluation](https://github.com/UbaidUllah777/Crop_Recommendation_Analysis/pull/3) — merged November 2, 2026.
+- [PR #4 — Rangeetha: final cluster analysis](https://github.com/UbaidUllah777/Crop_Recommendation_Analysis/pull/4) — merged November 4, 2026, after requested changes and approval.
+- [PR #5 — Koushik: conclusion and review updates](https://github.com/UbaidUllah777/Crop_Recommendation_Analysis/pull/5) — merged November 4, 2026, after requested changes and approval.
+
+These links document contributions and reviews. The final notebook is the authority for implemented methods and outputs; an earlier PR description may mention an evaluation metric that is absent from the final code.

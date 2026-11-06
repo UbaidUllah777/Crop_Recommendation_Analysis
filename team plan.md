@@ -88,7 +88,7 @@ The instructor's screenshot of Workshop A feedback reports strong coding and ana
 
 The next assignment returned to the same 2,200-record, 22-label dataset, but used **unsupervised K-Means** on **rainfall** and **relative humidity** rather than comparing preselected crop groups. Its question was: *Can similar recorded moisture conditions be grouped meaningfully, and how are the crop labels distributed among those groups?*
 
-The final uploaded Workshop B notebook has 37 cells, including a completed K = 6 model, cluster centroids in original units, six named groups, crop-by-cluster analysis, figures, and a final recommendation. It excludes crop labels from model fitting and uses them only to interpret the output. For details, see [`Crop_Recommendation_Workshop_B.ipynb`](Crop_Recommendation_Workshop_B.ipynb) and the separate Workshop B team plan.
+The final uploaded Workshop B notebook has **38 cells (19 code and 19 Markdown)**, including a completed K = 6 model, cluster centroids in original units, six named groups, crop-by-cluster analysis, figures, a final recommendation (Section 8), and Koushik's focused **final conclusion (Section 9)**. It excludes crop labels from model fitting and uses them only to interpret the output. For details, see [`Crop_Recommendation_Workshop_B.ipynb`](Crop_Recommendation_Workshop_B.ipynb) and the separate Workshop B team plan.
 
 **Roles recorded for Workshop B** (these are different from the preliminary role proposals in the original handoff plan):
 
@@ -105,7 +105,7 @@ PR #4 and PR #5 have recorded **changes requested followed by approval** from Ub
 - Seven numerical soil/environment variables were retained for profiling, while **rainfall and humidity** were standardized by z-score and used to fit K-Means.
 - Candidate values **K = 1–10** were assessed. The final recommendation is **K = 6** (inertia **552.36**, **87.4%** of the variation in the two standardized inputs, cluster sizes **190–541**).
 - The six groups were described in terms of their moisture measurements, not as verified farming zones or crop prescriptions.
-- The original Workshop A rice–maize rainfall contrast can be discussed alongside the grouping of rice records in the very-high-rainfall cluster and most maize records in a lower-rainfall cluster.
+- The original Workshop A rice–maize rainfall contrast can be discussed alongside the grouping of rice records in the very-high-rainfall cluster and most maize records in a lower-rainfall cluster; Section 9 of the integrated notebook explicitly draws this connection.
 
 This is a **historical handoff summary**, not a replacement for Workshop B results or the README. The dataset does not identify region, season, rainfall accumulation interval, or agricultural outcomes; no causal or practical crop-suitability claim is supported.
 
@@ -113,7 +113,7 @@ This is a **historical handoff summary**, not a replacement for Workshop B resul
 
 - Retain this document as the Workshop A history; do not rewrite the completed Workshop A notebook to match Workshop B.
 - Retain [`team plan - Workshop B.md`](team%20plan%20-%20Workshop%20B.md) as the separate Workshop B record.
-- Confirm the final Workshop B notebook, updated `README.md`, both team plans and input CSV are on the **branch linked for assessment**. When this document was checked, the final notebook was present on `assignment-3-kmeans-workshop-b` but **not yet on `main`**.
+- Confirm the final Workshop B notebook, updated `README.md`, both team plans and input CSV are on the **branch linked for assessment**. The integration branch is `assignment-3-kmeans-workshop-b`; confirm the final PR into `main` is merged before treating the default repository view as final.
 - Confirm a local **Restart Kernel → Run All** of the exact final notebook and keep the actual result; saved outputs alone do not prove a fresh-environment run.
 - Do not mark rehearsal, submission or further independent checks complete without evidence.
 
