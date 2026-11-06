@@ -1,128 +1,197 @@
 # Crop Recommendation Analysis
 
-Team project for **PROG8431 — Data Analysis, Mathematics, Modeling and Algorithms**.
+**PROG8431 — Data Analysis, Mathematics, Modeling and Algorithms**  
+**Team project | Assignments 1–3**
+
+This repository examines the **Crop Recommendation Dataset** through exploratory data analysis, statistical comparison, and unsupervised learning. The work progresses from understanding the dataset (Assignment 1), to comparing crop-labelled observations statistically (Workshop A), to identifying patterns in environmental measurements using **K-Means clustering** (Workshop B).
+
+> **Scope:** This is an exploratory analysis of a teaching dataset. The clusters describe similarities among the recorded measurements; they are **not** validated crop recommendations, agricultural prescriptions, or evidence of causation.
 
 ## Team
 
-| Team member | Student ID | GitHub | Workshop A responsibility | Workshop B proposed responsibility |
+| Member | Student ID | GitHub | Workshop A focus | Workshop B focus |
 |---|---|---|---|---|
-| Ubaid Ullah | 9110715 | [UbaidUllah777](https://github.com/UbaidUllah777) | Sections 12–15: statistical comparisons and communication | Introduction, two-variable choice, scaling, integration |
-| Rangeetha | 9081357 | [rangeethasajeer-debug](https://github.com/rangeethasajeer-debug) | Sections 8–11: visuals and normality | K-Means, elbow/validation, scatter plots |
-| Koushik Balne | 9087547 | [koushikbalne97](https://github.com/koushikbalne97) | Sections 1–7: setup, data and statistical profile | Cluster profile across all features, review and conclusion |
+| Ubaid Ullah | 9110715 | [UbaidUllah777](https://github.com/UbaidUllah777) | Statistical comparisons and communication (Sections 12–15) | Data quality, EDA, feature selection, scaling, and cluster-count evaluation |
+| Rangeetha | 9081357 | [rangeethasajeer-debug](https://github.com/rangeethasajeer-debug) | Visualizations and normality assessment (Sections 8–11) | Final cluster model, centres, profiles, crop-label analysis, and visualizations |
+| Koushik Balne | 9087547 | [koushikbalne97](https://github.com/koushikbalne97) | Setup, data exploration, and statistical profile (Sections 1–7) | Independent validation, conclusions, limitations, and final review |
 
-Workshop B responsibilities are a **proposed division**, not an assertion that the work is already complete. Actual individual work and peer review should be traceable through issues, commits and PRs.
+The focus areas reflect the team's division of responsibilities. The GitHub commit and pull-request history is the record of actual individual changes and reviews.
 
-## Research scope
+## Research questions
 
-**Original research question:** Which soil composition and environmental factors are associated with crop labels?
+**Overall question:** What soil-composition and environmental patterns are associated with the crop labels in this dataset?
 
-This teaching dataset supports exploratory comparisons and clustering. It does **not** by itself support causal findings, field-level irrigation prescriptions, or validated crop recommendations.
+**Workshop B question:** Can K-Means identify meaningful groups of recorded growing conditions using **rainfall** and **relative humidity**, and what do the resulting groups reveal about the distribution of crop labels?
 
-### Dataset
+The model does **not** use crop labels to form clusters. Labels are examined **after** clustering to interpret the groups.
 
-- **Source:** [Atharva Ingle — Crop Recommendation Dataset, Kaggle](https://www.kaggle.com/datasets/atharvaingle/crop-recommendation-dataset)
-- **Committed dataset:** [`Crop_recommendation.csv`](Crop_recommendation.csv), in repository root
+## Dataset
+
+- **Source:** [Crop Recommendation Dataset by Atharva Ingle (Kaggle)](https://www.kaggle.com/datasets/atharvaingle/crop-recommendation-dataset)
+- **Local file:** [`Crop_recommendation.csv`](Crop_recommendation.csv) (repository root)
+- **Records:** 2,200
+- **Crop labels:** 22, with 100 records for each label
 - **Columns:** `N`, `P`, `K`, `temperature`, `humidity`, `ph`, `rainfall`, `label`
-- **Observed dataset profile in earlier notebook:** 2,200 rows, 22 crop labels, 100 rows per crop, seven numeric variables.
-- Missing information includes location/time, rainfall accumulation interval, sampling design, and farm identifiers. Treat all insights as dataset associations.
 
-## Assignment 1 — Exploratory Data Analysis
+| Column | Description |
+|---|---|
+| `N`, `P`, `K` | Numerical soil-nutrient measurements |
+| `temperature` | Recorded temperature (°C) |
+| `humidity` | Recorded relative humidity (%) |
+| `ph` | Soil pH |
+| `rainfall` | Recorded rainfall (mm; accumulation period unspecified) |
+| `label` | Crop category; **used for interpretation, not K-Means training** |
+
+The Workshop B quality checks found **no missing values, exact duplicate rows, negative N/P/K or rainfall values, humidity outside 0–100%, or pH outside 0–14**. All 2,200 observations were retained. High-rainfall and low-humidity observations were explored with box plots rather than automatically deleted, because they are associated with particular crop-labelled records.
+
+## Assignment progression
+
+### Assignment 1 — Exploratory Data Analysis
 
 **Notebook:** [`assignment 1.ipynb`](assignment%201.ipynb)
 
-Includes data loading and cleaning, descriptive statistics, and visualizations such as histograms, box plots, scatter plots and Venn diagrams. The goal was to understand the distributions of growing-condition measurements and how they relate descriptively to crop labels.
+Introduced the dataset, explored soil and environmental measurements, calculated descriptive statistics, and used visualizations (including histograms, box plots, scatter plots, and Venn diagrams) to investigate patterns associated with crop labels.
 
-## Assignment 2 — Problem Analysis Workshop A
+### Assignment 2 — Problem Analysis Workshop A
 
 **Notebook:** [`Crop_Recommendation_Workshop_A.ipynb`](Crop_Recommendation_Workshop_A.ipynb)
 
-Extends exploratory analysis with:
+Extended the exploratory work with distribution comparisons, Q–Q plots, Shapiro–Wilk normality tests, a classical F-test for rainfall variances, and Welch's t-test with confidence-interval interpretation for **rice versus maize rainfall**.
 
-- Histograms and distribution comparisons
-- QQ plots and Shapiro–Wilk normality tests
-- Classical F-test to compare rice and maize rainfall variances
-- Welch's T-test, p-value and confidence interval for average rainfall
-- Summary report and interpretation limitations
+**Recorded result:** Mean rainfall was approximately **236.18 mm for rice** and **84.77 mm for maize**, a difference of about **151.41 mm**. The tested groups did not satisfy the normality assumption at the 5% level; consequently, the classical F-test needs cautious interpretation. These results describe the dataset and do not establish irrigation requirements.
 
-**Recorded finding:** rice-labelled observations have mean rainfall about **236.18 mm**, versus **84.77 mm** for maize, giving a mean difference of about **151.41 mm**. The groups reject normality at the 5% level; the F-test has a violated normality assumption and must be interpreted cautiously. These are not irrigation requirements.
+### Assignment 3 — Problem Analysis Workshop B: K-Means Clustering
 
-## Assignment 3 — Problem Analysis Workshop B: K-Means Clustering
+**Final integrated notebook:** [`Crop_Recommendation_Workshop_B.ipynb`](Crop_Recommendation_Workshop_B.ipynb)
 
-**Status: planned / in development — do not mistake the plan for completed results.**
+The final integrated notebook contains **38 cells (19 code and 19 Markdown)**, including the conclusion in **Section 9**. Its saved code outputs have execution counts 1–19 with no stored error output. This is evidence of a saved run, not an independent test on a fresh environment.
 
-**Planned notebook:** `Crop_Recommendation_Workshop_B.ipynb` (will be linked after it is added)
+The notebook contains these stages:
 
-**Proposed question:** Can K-Means identify meaningful groups of growing conditions, and how do crop labels distribute across the groups?
+1. **Load and assess the data:** Inspect shape, types, missing values, duplicates, crop balance, and numerical validity.
+2. **Perform EDA:** Examine distributions, descriptive statistics, box plots, and scatter plots for rainfall, humidity, and the alternative candidate temperature.
+3. **Select features:** Compare rainfall–temperature with rainfall–humidity. Their Pearson correlations were approximately **−0.030** and **0.094**, respectively; the rainfall–humidity plot provided a useful exploratory view of moisture-related concentrations.
+4. **Compare transformations:** Demonstrate Min-Max (`sta01()`) and Z-score (`stamn()`) scaling. Use **Z-score-standardized rainfall and humidity** for distance-based K-Means; retain original measurements for interpretation.
+5. **Evaluate cluster counts:** Fit K-Means for **K = 1 through 10**, generate the elbow curve, calculate the reduction in inertia and fraction of two-feature variation explained, examine cluster sizes, and visualize **K = 3, 4, 5, and 6**.
+6. **Select and describe the final model:** Choose **K = 6**, convert cluster centres back to original units, assign descriptive names, and summarize all seven numerical variables and crop-label distributions.
+7. **Interpret results and limitations:** Explain what the six groups show—and what they do not demonstrate about real agricultural suitability.
+8. **Conclude (Section 9):** Summarize the research question, the K = 6 outcome, the rice–maize contrast and the need for real-world validation.
 
-The assignment requires that we:
+**K-Means settings:** `n_init=10`, `random_state=42`, with Euclidean-distance clustering on `rainfall_std` and `humidity_std`.
 
-1. Follow the Week 7 clustering demonstration and inspect/refine the existing dataset.
-2. Explain why clustering may deepen understanding of our project data.
-3. Choose and justify two variables used to define clusters.
-4. Examine and standardize using one of the methods shown in class; explain the choice.
-5. Run K-Means and use an elbow chart plus additional assessment to justify the final cluster count.
-6. Visualize clusters and profile them with **all relevant dataset variables**, assign descriptive names, and explain insights and limitations.
-7. Present the **same submitted notebook** in a seven-minute team presentation.
+## Workshop B — Final results
 
-**Important:** We have **not** chosen the final two variables, scaler, number of clusters, or findings yet. These should be evidence-based, using the course demonstration as the primary implementation reference.
+### Why Z-score standardization?
 
-## Repository organization
+Before scaling, rainfall had a mean of **103.46 mm** and standard deviation of **54.96 mm**; humidity had a mean of **71.48%** and standard deviation of **22.26 percentage points**. After Z-score standardization, both variables have a mean of approximately zero and standard deviation of one.
 
-Existing committed material:
+The notebook also shows that Min-Max scaling would give rainfall a standard deviation of **0.197**, versus **0.260** for humidity. Z-score was chosen to give the two features comparable spread in the K-Means distance calculation, without changing the original values used to describe the clusters.
 
-- `assignment 1.ipynb` — Assignment 1
-- `Crop_Recommendation_Workshop_A.ipynb` — Assignment 2
-- `Crop_recommendation.csv` — source data kept in repository root
-- `figures/` — generated figures
-- `Teams_whiteboard_draft.png` — Workshop A summary figure
-- `team plan.md` — existing Workshop A plan (preserve for history)
+### Choosing the number of clusters
 
-Planned Workshop B additions:
+The elbow curve has an early bend near **K = 3**, but the notebook's combined evidence supports **K = 6** as a more detailed and interpretable representation of the moisture patterns.
 
-- `Crop_Recommendation_Workshop_B.ipynb` — new notebook
-- `team plan - Workshop B.md` — project plan and task allocation
-- `collaboration/Workshop_B_review_log.md` — genuine work and review records, if created
-- `requirements.txt` — environment dependencies, if not already added
+| K | Inertia (within-cluster SS) | Variation explained in the two standardized features | Smallest cluster | Largest cluster |
+|---:|---:|---:|---:|---:|
+| 3 | 1,413.29 | 67.9% | 430 | 1,295 |
+| 4 | 1,030.73 | 76.6% | 244 | 969 |
+| 5 | 757.56 | 82.8% | 240 | 552 |
+| **6** | **552.36** | **87.4%** | **190** | **541** |
 
-## Run locally
+Adding the sixth cluster reduced inertia by **205.20** compared with K = 5. The following step, from **K = 6 to 7**, reduced inertia by only **87.77**, showing a substantial drop in incremental improvement. The final K = 6 groups also have workable sizes and interpretable centres.
 
-1. Clone the repository and change to its root folder.
-2. Create and activate a virtual environment.
-3. Install declared dependencies with `python -m pip install -r requirements.txt` **after** that file is committed, or use your existing working environment in the meantime.
-4. Launch Jupyter with `jupyter lab` (or use VS Code's Jupyter extension).
-5. Open the desired `.ipynb` and run **Restart Kernel → Run All**.
-6. Keep `Crop_recommendation.csv` in the **repository root** for the existing Workshop A notebook, which loads it there.
+**Important:** The **87.4%** figure is the share of total variation accounted for by the clusters in these **two standardized inputs**. It is **not** classification accuracy, recommendation accuracy, or a measure of crop yield. The final notebook does not report silhouette scores; its selection relies on inertia, incremental improvement, variation explained, cluster sizes, and visual interpretation.
 
-Example on Windows PowerShell:
+### Final six-cluster scheme
+
+Cluster names are based on their centre **humidity** and **rainfall** values. The numbering orders humidity bands first, then rainfall within each band; it is not one overall dry-to-wet ranking.
+
+| # | Cluster | Records | Share | Centre humidity | Centre rainfall | Examples of crop-label membership |
+|---:|---|---:|---:|---:|---:|---|
+| 1 | **Very Low Humidity, Moderate Rainfall** | 209 | 9.5% | 19.95% | 93.39 mm | All chickpea and kidneybeans records |
+| 2 | **Moderate Humidity, Low Rainfall** | 500 | 22.7% | 59.31% | 68.80 mm | All blackgram, lentil, mango, and mothbeans records; 89% of maize records |
+| 3 | **Moderate Humidity, High Rainfall** | 190 | 8.6% | 55.22% | 159.56 mm | 97% of coffee and 80% of pigeonpeas records |
+| 4 | **High Humidity, Low Rainfall** | 481 | 21.9% | 85.77% | 51.82 mm | All grapes, muskmelon, mungbean, and watermelon records; 56% of cotton records |
+| 5 | **High Humidity, Moderate Rainfall** | 541 | 24.6% | 88.20% | 111.56 mm | All apple, banana, orange, and pomegranate records |
+| 6 | **High Humidity, Very High Rainfall** | 279 | 12.7% | 85.93% | 208.26 mm | All rice records; 73% of jute and 61% of coconut records |
+
+*The crop percentages describe how each crop label's **own records** are distributed among clusters; they do not mean that the cluster is suitable for those crops.* The final notebook includes a crop-by-cluster heatmap, cluster-centre scatter plot, full seven-variable means, and box plots for `N`, `P`, `K`, `temperature`, and `ph`.
+
+### Main findings
+
+- **Six groups summarize 22 crop labels:** Humidity produces several broad bands, while rainfall separates groups within the moderate- and high-humidity ranges.
+- **Workshop A's rice–maize contrast appears in the broader clustering pattern:** Rice records fall in the very-high-rainfall group; most maize records fall in the moderate-humidity, low-rainfall group.
+- **Clusters describe measurements, not botanical categories:** Crop labels from related categories do not necessarily appear together. Some labels, especially papaya, also span several moisture clusters.
+- **Other variables differ across the resulting groups:** For example, the very-low-humidity group has a mean temperature near 20°C and relatively low nitrogen, while the high-humidity/low-rainfall group has high mean nitrogen and potassium. These are descriptive associations, **not** causal findings.
+
+## Conclusions and limitations
+
+The final recommendation is **K-Means with K = 6**, trained on **Z-score-standardized rainfall and relative humidity**, with clusters interpreted using original measurements and crop-label distributions. **Section 9** concludes that the six groups summarize recorded moisture conditions and place rice and most maize observations in different moisture groups. These are descriptive patterns in the supplied dataset, not validated crop recommendations.
+
+Its limitations are important:
+
+- The dataset is **balanced by crop label** (100 records each); cluster size is not an estimate of real-world farmland frequency.
+- Location, date, farming season, sampling method, and rainfall accumulation period are not provided.
+- The crop `label` is **not a measured yield or successful growing outcome**; clustering cannot validate which crops will perform best at a location.
+- The model uses **only two** environmental features. Soil nutrients, temperature, and pH are profiled afterward, not used to determine membership.
+- K-Means imposes geometric partitions. Some boundaries in the high-humidity region are model-dependent rather than natural agricultural borders.
+- Neither the cluster assignments nor the observed statistical associations establish cause and effect or replace field trials and locally representative agronomic data.
+
+## Repository files
+
+| File or folder | Purpose |
+|---|---|
+| [`assignment 1.ipynb`](assignment%201.ipynb) | Assignment 1: exploratory analysis |
+| [`Crop_Recommendation_Workshop_A.ipynb`](Crop_Recommendation_Workshop_A.ipynb) | Assignment 2: statistical analysis |
+| [`Crop_Recommendation_Workshop_B.ipynb`](Crop_Recommendation_Workshop_B.ipynb) | **Assignment 3: completed K-Means clustering analysis** |
+| [`Crop_recommendation.csv`](Crop_recommendation.csv) | Input dataset; keep at repository root |
+| `figures/` | Supporting figures from project work, where included |
+| `team plan.md` | Workshop A final historical plan and handoff to Workshop B |
+| `team plan - Workshop B.md` | Completed Workshop B work, PR evidence, presentation plan and checks |
+| `README.md` | Project overview, methods, results, and reproduction instructions |
+
+The core Workshop B deliverable is the **`.ipynb` notebook itself** (not a ZIP). Plots, tables, model comparisons, cluster interpretations, and the final conclusion are stored in the notebook.
+
+## How to run
+
+1. Clone the repository and open its **root directory**.
+2. Confirm that `Crop_recommendation.csv` is in that root directory, alongside `Crop_Recommendation_Workshop_B.ipynb`.
+3. Use a Python virtual environment, install the required packages, and start JupyterLab (or open the notebook using the VS Code Jupyter extension).
+4. Open the Workshop B notebook and select **Restart Kernel → Run All**.
+
+Example for **Windows PowerShell**:
 
 ```powershell
 py -m venv .venv
 .\.venv\Scripts\Activate.ps1
-python -m pip install -r requirements.txt
+python -m pip install --upgrade pip
+python -m pip install pandas numpy matplotlib seaborn scikit-learn ipython jupyterlab
 jupyter lab
 ```
 
-Typical dependencies for the earlier notebooks include NumPy, pandas, Matplotlib, seaborn, SciPy, matplotlib-venn, IPython, and Jupyter. Workshop B may add scikit-learn depending on the exact course demonstration. Verify installation and notebook execution before final submission; do not assume a fresh setup was tested simply because results are saved inside the notebook.
+For the earlier assignment notebooks, additional libraries such as **SciPy** and **matplotlib-venn** may be needed. If the repository contains an up-to-date `requirements.txt`, `python -m pip install -r requirements.txt` can be used instead.
 
-## Team development workflow for Workshop B
+The Workshop B notebook reads the input using:
 
-- Stable past work stays on `main`.
-- Integrate Assignment 3 on `assignment-3-kmeans-workshop-b`.
-- Each teammate creates a separate feature branch for their own task, with an appropriately named GitHub issue and one focused pull request.
-- A different member adds a substantive comment or approval before merging.
-- Cite real issue/PR/commit links in the collaborative log; never invent co-authors, reviews, or meetings.
-- Coordinate editing a shared `.ipynb` file, because simultaneous notebook edits can cause difficult merge conflicts.
+```python
+from pathlib import Path
+import pandas as pd
 
-See [`team plan - Workshop B.md`](team%20plan%20-%20Workshop%20B.md) after it is committed for task assignments, reviewer rotation, seven-minute presentation order, and quality checklist.
+df = pd.read_csv(Path("Crop_recommendation.csv"))
+```
 
-## Presentation and submission
+The seed and `n_init` setting support repeatable K-Means results when using a compatible environment. The saved notebook outputs document the reported results; they do not by themselves verify a clean rerun on a different machine.
 
-- Workshop B: **seven-minute** notebook presentation. Ubaid first (3 min), Rangeetha second (3 min), Koushik last (1 min).
-- All three must understand the methods and be able to answer questions and adjust code.
-- Submit the **`.ipynb` file itself (not zipped)** and GitHub repository URL; present that exact submitted notebook.
-- **Deadline clarification:** the portal screenshot shows Nov 5, 2026 at **8:30 PM**, while the assignment PDF says before Nov 5 at **10 PM**. Follow the earlier time unless your instructor confirms otherwise.
-- The PDF also contains an inconsistent five-minute phrase, but its explicit mandatory presentation instructions state **seven minutes**.
+## Data attribution
 
-## Academic and technical caution
+**Dataset:** Atharva Ingle, [Crop Recommendation Dataset on Kaggle](https://www.kaggle.com/datasets/atharvaingle/crop-recommendation-dataset).
 
-Cluster labels describe patterns in the selected measurements; they are not verified crop requirements. Sample independence, data representativeness, farming season and rainfall period remain unknown. Final claims must be limited to what the observed dataset supports.
+**Project:** Academic team analysis for PROG8431. Findings should be interpreted as exploratory observations from this dataset, not practical farming advice.
+
+## Collaboration record
+
+- [PR #3 — Ubaid: EDA, scaling and K evaluation](https://github.com/UbaidUllah777/Crop_Recommendation_Analysis/pull/3) — merged November 2, 2026.
+- [PR #4 — Rangeetha: final cluster analysis](https://github.com/UbaidUllah777/Crop_Recommendation_Analysis/pull/4) — merged November 4, 2026, after requested changes and approval.
+- [PR #5 — Koushik: conclusion and review updates](https://github.com/UbaidUllah777/Crop_Recommendation_Analysis/pull/5) — merged November 4, 2026, after requested changes and approval.
+
+These links document contributions and reviews. The final notebook is the authority for implemented methods and outputs; an earlier PR description may mention an evaluation metric that is absent from the final code.

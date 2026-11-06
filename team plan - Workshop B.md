@@ -2,95 +2,139 @@
 
 **Course:** PROG8431 — Data Analysis, Mathematics, Modeling and Algorithms  
 **Project:** Crop Recommendation Analysis  
-**Assignment:** Problem Analysis Workshop B  
-**Working branch (proposed):** `assignment-3-kmeans-workshop-b`  
-**Submission:** Jupyter notebook and repository URL. No ZIP submission.  
-**Deadline:** eConestoga displays November 5, 2026 at 8:30 PM; the PDF says before November 5, 10 PM. Use earlier portal time unless instructor confirms otherwise.  
-**Presentation:** 7 minutes, with the submitted notebook (no PowerPoint). The PDF also contains an inconsistent 5-minute phrase; the explicit presentation instructions say 7 minutes.
+**Assignment:** Problem Analysis Workshop B (Assignment 3)  
+**Final notebook:** [`Crop_Recommendation_Workshop_B.ipynb`](Crop_Recommendation_Workshop_B.ipynb)  
+**Working integration branch:** `assignment-3-kmeans-workshop-b`  
+**Repository:** [UbaidUllah777/Crop_Recommendation_Analysis](https://github.com/UbaidUllah777/Crop_Recommendation_Analysis)  
+**Submission format:** Unzipped Jupyter notebook (`.ipynb`) and repository link  
+**Deadline note:** The portal screenshot previously showed **November 5, 2026, 8:30 PM**; the assignment PDF gave a later time. Use the earlier portal deadline unless the instructor has confirmed otherwise.  
+**Presentation plan:** Seven minutes using the same submitted notebook, not a separate slide deck.
 
-## 1. Team and ownership
+> **Status (November 5, 2026):** Analysis and notebook sections are complete in the final uploaded copy. PRs #3, #4 and #5 were merged into the Assignment 3 integration branch. Fresh-kernel verification, presentation rehearsal, submission, and visibility of the final files on `main` must be checked separately rather than assumed.
 
-| Member | Student ID | GitHub username | Proposed primary task | Presentation |
+## 1. Project goal and research question
+
+**Research question:** Can K-Means identify meaningful groups of growing conditions in the Crop Recommendation Dataset, and how are crop labels distributed among those groups?
+
+Assignments 1–2 described variables and compared rice and maize rainfall. Workshop B uses **unsupervised clustering** to group records based on similar **rainfall** and **relative humidity**. Crop labels are **excluded from the clustering inputs** and examined only after the clusters have been formed.
+
+The Kaggle Crop Recommendation Dataset contains **2,200 records, 22 crop labels (100 records per label), and seven numerical variables**: `N`, `P`, `K`, `temperature`, `humidity`, `ph`, `rainfall`. The workshop notebook reads `Crop_recommendation.csv` from the repository root.
+
+**Interpretation boundary:** These are descriptive groups in the supplied data, not validated growing zones, irrigation requirements, causal relationships, yield predictions or verified recommendations for actual farms.
+
+## 2. Team members, responsibilities and speaking order
+
+| Member | Student ID | GitHub | Workshop B contribution documented in repository | Presentation order |
 |---|---|---|---|---|
-| Ubaid Ullah | 9110715 | `UbaidUllah777` | Research framing; source verification; variable selection rationale; standardization with clear justification; integration and quality review | First (0:00–3:00) |
-| Rangeetha | 9081357 | `rangeethasajeer-debug` | K-Means implementation; elbow and supporting cluster evaluation; scatter plots; draft cluster interpretation | Second (3:00–6:00) |
-| Koushik Balne | 9087547 | `koushikbalne97` | Check dataset quality; review cluster counts and descriptive profiles; prepare clear limitations/conclusion; verify notebook run | Third (6:00–7:00) |
+| **Ubaid Ullah** | **9110715** | [UbaidUllah777](https://github.com/UbaidUllah777) | Data quality and EDA; choice of rainfall and humidity; scaling; K-Means elbow/evaluation and candidate-K comparisons; coordination and PR reviews | **First — 0:00–3:00** |
+| **Rangeetha** | **9081357** | [rangeethasajeer-debug](https://github.com/rangeethasajeer-debug) | Final K = 6 assignments, original-unit centres, full cluster profiles, crop-label distribution and clustering figures | **Second — 3:00–6:00** |
+| **Koushik Balne** | **9087547** | [koushikbalne97](https://github.com/koushikbalne97) | Conclusion and review-oriented improvements in the final integrated notebook | **Third — 6:00–7:00** |
 
-**Ownership is a proposal, not proof of completed work.** Everyone should contribute commits, review a teammate's work, understand the full notebook, and be able to make basic code changes. Do not claim anyone reviewed or attended a meeting unless it actually occurred.
+The PR history below is the primary evidence of contributions and formal reviews. Every presenter should still understand all sections sufficiently to answer questions.
 
-## 2. Continuity from earlier assignments
+## 3. Work completed in the final notebook
 
-- Assignment 1: `assignment 1.ipynb` — exploratory analysis, cleaning, statistics and visualizations.
-- Assignment 2: `Crop_Recommendation_Workshop_A.ipynb` — rainfalls of rice vs maize, normality, F-test, Welch t-test, p-values and communication.
-- Workshop B: new notebook `Crop_Recommendation_Workshop_B.ipynb`, based on the same `Crop_recommendation.csv` and extending the project with unsupervised K-Means clustering.
-- **Do not overwrite or revise old submitted notebooks** for Workshop B.
+| Notebook section | Implemented content | Evidence in final uploaded notebook |
+|---|---|---|
+| 1–3: Overview, setup and cleaning | Context, imports, source CSV, types, missing/duplicate/validity checks | 2,200 × 8; 22 labels; no missing values or exact duplicates; no checked invalid nutrient, rainfall, humidity or pH values |
+| 4: Exploratory analysis | Descriptive statistics, histograms, box plots, candidate-variable scatter plots and justification | Rainfall–humidity selected instead of rainfall–temperature for the moisture-focused question |
+| 5: Transformation | `sta01()` Min-Max comparison and `stamn()` z-score method | **Only Z-score** rainfall and humidity are used as K-Means inputs; originals are retained |
+| 6: K selection | Inertia for K = 1–10, elbow plot, improvement per additional K, variation explained, scatter comparison of K = 3–6 and cluster-size checks | Final recommendation **K = 6** |
+| 7: Final grouping | Stored K = 6 model, original-unit centres, six named clusters, counts, means of **all seven** numeric variables, crop heatmap, additional profiles and interpretation | **All six clusters profiled**; figures and tables included |
+| 8: Recommendation | Model choice, methodological rationale and limitations | Rainfall + humidity; Z-score; K-Means with `random_state=42`, `n_init=10`; K = 6 |
+| 9: Conclusion | Concise answer to the original research question, rice–maize pattern, and limitations | The final integrated notebook includes Koushik's concluding Markdown section |
 
-**Proposed question:** Can K-Means identify meaningful groups of growing conditions, and how are crop labels distributed among those groups?
+**Source-version check:** The downloaded **Assignment 3 integration-branch notebook** has **38 cells**, with **19 executed code cells** and **Section 9: Final Conclusion**. The earlier copy without Section 9 is not the final version.
 
-**Important:** K-Means produces clusters of similar input measurements, not verified growing requirements or a trained supervised crop recommender.
+**Important correction:** Older planning text and the original description of PR #3 mentioned **silhouette scores**. The **final uploaded notebook does not import or calculate a silhouette metric**. Its model selection is based on the elbow/inertia evidence, variation explained, sizes, scatter plots and descriptive utility. Do not report 0.508 or make a silhouette-based selection claim when presenting this final notebook.
 
-## 3. Rubric-to-notebook checklist
+The downloaded final integrated notebook contains saved outputs for **19 code cells** with execution numbers 1–19 and no stored error outputs. That indicates a completed saved execution, **not** independently verified fresh-kernel reproducibility.
 
-| Professor requirement | Planned work and acceptance evidence |
-|---|---|
-| 3(a): Names/IDs first | First notebook Markdown cell includes all three members and IDs |
-| 3(b): Setup | Explicit imports, reproducibility settings, dependencies, relative paths; fresh-run validation |
-| 3(c): Refine data source | Reuse the committed Kaggle CSV; inspect missing, duplicates, data types, distribution, and limitations; add sources only if justified |
-| 3(d): Follow class demonstration | Match techniques and sequence in the Week 7 clustering demo; document any deviations |
-| 3(e): Explain clustering value | Markdown explains what grouping similar field conditions can reveal and cannot prove |
-| 3(f): Choose two variables | Select *after reviewing the demonstration and distributions*; explicitly justify both; show units and cluster-centre interpretation |
-| 3(g): Describe and standardize | Inspect before-scaling summary/plots; use one of the **two class-demonstrated methods**; explain why and show after-scaling checks |
-| 3(h): Choose k | Run K-Means; elbow plot plus class-supported secondary assessment; justify final k and show scatter plots |
-| 3(i): Summary and names | Profile clusters across **all available features**, not only the two clustering variables; assign descriptive, evidence-based names and discuss limitations |
-| 3(j): Other algorithms | Prefer class-demonstrated algorithms; if deviating, document and be ready to explain differences |
-| 4: Presentation | Rehearse a 7-minute live notebook walkthrough; each member has a working laptop and knows entire workflow |
+## 4. How K = 6 was chosen
 
-**Don't predetermine the two variables, scaler or number of clusters:** choose them after inspecting the demonstration code and the data; explain tradeoffs.
+The clustering inputs are `rainfall_std` and `humidity_std`, produced by z-score standardization. Inertia decreases as K increases, so the team compared marginal improvement, variation explained, cluster sizes and visual separation rather than treating the lowest inertia as the answer.
 
-## 4. Individual PR / issue workflow (proposed)
+| K | Inertia / within-cluster SS | Variation explained (two standardized inputs) | Smallest cluster | Largest cluster |
+|---:|---:|---:|---:|---:|
+| 3 | 1,413.29 | 67.9% | 430 | 1,295 |
+| 4 | 1,030.73 | 76.6% | 244 | 969 |
+| 5 | 757.56 | 82.8% | 240 | 552 |
+| **6** | **552.36** | **87.4%** | **190** | **541** |
 
-Use one GitHub issue for each scoped task, with an owner, checklist, and links to the completing PR. Examples:
+The graph bends near **K = 3**, but additional clusters still separate visibly different rainfall values. Adding the sixth cluster reduces inertia by about **205.20**, while adding the seventh reduces it by about **87.77**. The K = 6 groups were then checked for reasonable size and interpretable environmental patterns.
 
-1. **Issue A — Data, question, and standardization**, owner Ubaid, reviewer Rangeetha. Branch `workshop-b/ubaid-data-scaling`.
-2. **Issue B — K-Means and evaluation**, owner Rangeetha, reviewer Ubaid. Branch `workshop-b/rangeetha-kmeans`.
-3. **Issue C — Cluster profile and conclusion**, owner Koushik, reviewer Rangeetha. Branch `workshop-b/koushik-cluster-summary`.
-4. **Issue D — Integration and seven-minute rehearsal**, shared task. Track real contributions in comments and the final PR.
+The **87.4%** number describes variation accounted for in the **two standardized clustering variables**; it is **not** predictive or crop recommendation accuracy. K = 6 is a documented, defensible choice for this analysis, not a uniquely correct cluster count for agriculture.
 
-PR description should include: linked issue, changed files, approach, screenshots/plots if useful, how it was tested, and outstanding limitations. Have another member leave a **real** approval or substantive review comment before merging into the Workshop B integration branch. Never fabricate reviews, co-author lines, meetings, or time entries.
+## 5. Final six-cluster scheme
 
-**Suggested log:** `collaboration/Workshop_B_review_log.md` with date, task, participant, evidence (issue/PR/commit link), review decision, and whether any follow-up was needed. Only add genuine records.
+The cluster numbers order the humidity bands first and rainfall bands within them. Cluster names are descriptive and based on measured centres only.
 
-## 5. Branch structure
+| # | Descriptive cluster name | Records | Share of dataset | Centre humidity | Centre rainfall |
+|---:|---|---:|---:|---:|---:|
+| 1 | Very Low Humidity, Moderate Rainfall | 209 | 9.5% | 19.95% | 93.39 mm |
+| 2 | Moderate Humidity, Low Rainfall | 500 | 22.7% | 59.31% | 68.80 mm |
+| 3 | Moderate Humidity, High Rainfall | 190 | 8.6% | 55.22% | 159.56 mm |
+| 4 | High Humidity, Low Rainfall | 481 | 21.9% | 85.77% | 51.82 mm |
+| 5 | High Humidity, Moderate Rainfall | 541 | 24.6% | 88.20% | 111.56 mm |
+| 6 | High Humidity, Very High Rainfall | 279 | 12.7% | 85.93% | 208.26 mm |
+| **Total** | | **2,200** | **100.0%** | | |
 
-- `main`: stable Assignment 1 and Workshop A materials.
-- `assignment-3-kmeans-workshop-b`: Workshop B integration branch, created from `main`.
-- `workshop-b/ubaid-data-scaling`: Ubaid's individual feature branch.
-- `workshop-b/rangeetha-kmeans`: Rangeetha's individual feature branch.
-- `workshop-b/koushik-cluster-summary`: Koushik's individual feature branch.
+Selected descriptive observations from the notebook:
 
-A personal branch is **not** a substitute for a PR or substantive review. Start teammates' branches from the current integration branch, coordinate notebook cell editing to minimize merge conflicts, and pull changes before coding.
+- Every **rice** record is in cluster 6; **89% of maize** records are in cluster 2. This is compatible with Workshop A's recorded rainfall differences but does not prove crop water requirements.
+- All records for chickpea and kidney beans appear in cluster 1; all records for apple, banana, orange and pomegranate appear in cluster 5.
+- Some crop labels span groups: papaya records are distributed across clusters 4–6. The groups therefore do **not** correspond one-to-one to crop labels.
+- Means of nitrogen, phosphorus, potassium, temperature and soil pH were evaluated **after** the clusters were fitted, rather than used to determine the clusters.
 
-## 6. Presentation structure — 7 minutes
+These percentages describe **where each crop label's records appear in this dataset**, not success rates or real-world suitability.
 
-| Presenter | Time | Show in submitted notebook | Key message |
+## 6. Actual collaboration and PR review record
+
+| PR | Author / scope | Review evidence | GitHub status |
 |---|---|---|---|
-| Ubaid | 0:00–3:00 | Team/title; focused research question; dataset checks; two variables; before/after standardization | What problem we ask, what two dimensions we chose, and why scaling is appropriate |
-| Rangeetha | 3:00–6:00 | K-Means cell; elbow; secondary evaluation; scatter plots; cluster descriptions | Why this number of clusters and what patterns were found |
-| Koushik | 6:00–7:00 | All-feature cluster summary, limitations and conclusions | What the clusters mean, what they do not prove, and how to investigate next |
+| [#3 — Ubaid's initial analysis](https://github.com/UbaidUllah777/Crop_Recommendation_Analysis/pull/3) | Ubaid: EDA, scaling and clustering evaluation | Merged; **no formal submitted GitHub review** was returned for this PR | **Merged November 2, 2026** |
+| [#4 — final cluster analysis](https://github.com/UbaidUllah777/Crop_Recommendation_Analysis/pull/4) | Rangeetha: final K-Means model and interpretation | Ubaid requested changes November 3; later **approved** November 4 | **Merged November 4, 2026** |
+| [#5 — conclusion and review findings](https://github.com/UbaidUllah777/Crop_Recommendation_Analysis/pull/5) | Koushik: final conclusion and review improvements | Ubaid requested simplification; then **approved** November 4 | **Merged November 4, 2026** |
 
-**Rehearsal targets:** practice with a 6:30–6:45 target to leave room for notebook navigation; hard stop by 7:00. Present only key cells/charts, not every line. Every member keeps a backup notebook copy and tests the classroom connection. All members practice questions about scaling, k selection, feature choice, cluster labels, and limitations.
+This table describes verified PR status and review events, not unrecorded meetings or an independently witnessed notebook run. Earlier review requests about silhouette wording or removal of the word *augmented* are historical review comments; the final file content is the authority for what the actual submitted analysis performs.
 
-## 7. Feedback from Workshop A to address
+**Integration practice:** Teammates contributed through distinct branches and their work was combined into `assignment-3-kmeans-workshop-b`. Before final submission, check whether that branch has been merged to `main`; at the last repository check for this update, the Workshop B notebook was **not found on `main`**.
 
-Prior rubric: technical work scored well; the team lost marks for unclear connection between the problem and test, notebook narrative, exceeding time, difficulty answering questions, and individual collaboration evidence. Workshop B remedies: put the research question above the clustering procedure, explicitly connect every plot to the decision, assign speakers and rehearse, and retain authentic issue/PR/review evidence.
+## 7. Seven-minute notebook presentation plan
 
-## 8. Review gates
+| Time | Presenter | Focus and explanation |
+|---|---|---|
+| **0:00–0:20** | Ubaid | Research question: group moisture conditions instead of comparing only two crops |
+| **0:20–1:10** | Ubaid | Data checks and why rainfall + humidity were chosen |
+| **1:10–2:00** | Ubaid | Compare scaling methods; explain why distance-based K-Means uses Z-scores |
+| **2:00–3:00** | Ubaid | Elbow, marginal inertia reductions, candidate plots, and K = 6 trade-off **without a silhouette claim** |
+| **3:00–3:50** | Rangeetha | Final K = 6 scatter plot and cluster centres in original units |
+| **3:50–4:50** | Rangeetha | Six cluster names, sizes, and moisture characteristics |
+| **4:50–6:00** | Rangeetha | Seven-variable profiles, crop-label heatmap and key insights |
+| **6:00–7:00** | Koushik | Conclusions, limitations and what would require real farm data |
 
-- [ ] Inspect Unit 4 and Unit 5 notes and Week 7 demonstration notebook; verify chosen APIs match class.
-- [ ] Verify data file, imports, and fresh-kernel run.
-- [ ] Keep all values and selection/scaling decisions reproducible.
-- [ ] Confirm all deliverable Markdown explanations and plots exist.
-- [ ] Confirm proposed clusters are justified, correctly named, and profiled using the whole dataset.
-- [ ] Peer-review all code and narrative; track actual review links.
-- [ ] Rehearse 7 minutes and practice professor questions.
-- [ ] Submit the exact `.ipynb` used for the presentation, plus the GitHub repository URL.
+The order is a **presentation plan**, not a claim a rehearsal happened. Koushik's speaking portion should align with **Section 9**, rather than reading the detailed Section 8 recommendations again. Demonstrate the **exact notebook submitted** and be ready to answer questions about the entire analysis.
+
+## 8. Limitations and responsible interpretation
+
+- Cluster boundaries are based only on rainfall and relative humidity; the remaining five numeric features are summarized afterward.
+- Crop labels represent categories in a balanced teaching dataset, not measured yields, farmer outcomes or confirmed suitability at a location.
+- The dataset lacks specified date, location, farming season, rainfall accumulation period, sampling method and independent field validation.
+- K-Means creates geometric boundaries; the higher-humidity region is relatively continuous and its boundaries may be model-dependent.
+- No irrigation prescriptions, causal claims, yield predictions or population-level estimates follow from these groupings.
+
+## 9. Final submission checklist
+
+- [x] All names and IDs appear in the final notebook.
+- [x] Data checks, EDA, feature choice and scaling comparison are included.
+- [x] K = 1–10 elbow/inertia evaluation and K = 3–6 comparison are included.
+- [x] Final K = 6 model, centroids, named groups, seven-variable profiles and crop-label analysis are included.
+- [x] Section 9 final conclusion (Koushik), limitations, charts and summary tables are included.
+- [x] PRs #3, #4 and #5 are merged; formal approved reviews recorded for #4 and #5.
+- [ ] Independently perform **Restart Kernel → Run All** on the final uploaded notebook and confirm all outputs and paths.
+- [ ] Place the final `Crop_Recommendation_Workshop_B.ipynb`, `README.md` and both team plans on the branch being submitted; confirm branch visibility on GitHub.
+- [ ] Ensure final `README.md` makes **no silhouette-score claim**, matching the final notebook.
+- [ ] Confirm seven-minute rehearsal and readiness for professor questions (only if performed).
+- [ ] Submit the unzipped `.ipynb` and correct GitHub repository/branch URL before the instructor's deadline.
+
+**Updated for the final integrated notebook:** November 5, 2026. This replaces the November 1 draft. Completed results and verified PR histories are reported; outstanding checks are not misrepresented as complete.
