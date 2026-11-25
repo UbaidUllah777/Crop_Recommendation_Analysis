@@ -1,2 +1,8 @@
 .venv
 .DS_Store
+
+# Workshop C
+data/
+crop_study_file.csv
+.ipynb_checkpoints/
+.venv/
