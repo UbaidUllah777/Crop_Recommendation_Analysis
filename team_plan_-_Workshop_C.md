@@ -5,7 +5,7 @@
 **Assignment:** Problem Analysis Workshop C  
 **Final notebook:** [`PROG8431_CropAnalyzer_Regression.ipynb`](PROG8431_CropAnalyzer_Regression.ipynb)  
 **Member branches:** `workshop-cd/rangeetha`, `workshop-cd/ubaid`, `workshop-cd/koushik`  
-**Integration branch:** `main` — each member branch merges only through a reviewed pull request  
+**Integration branch:** `assignment-4-regression-workshop-c` — each member branch merges only through a reviewed pull request  
 **Repository:** [UbaidUllah777/Crop_Recommendation_Analysis](https://github.com/UbaidUllah777/Crop_Recommendation_Analysis)  
 **Submission format:** Jupyter notebook (`.ipynb`) confirm against the Workshop C instructions  
 
