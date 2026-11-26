@@ -8,3 +8,5 @@ matplotlib-venn
 scikit-learn
 ipython
 jupyterlab
+statsmodels
+
